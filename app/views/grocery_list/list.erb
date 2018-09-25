@@ -1,8 +1,11 @@
 <p> Welcome, <%= current_user.username %>
-<h2> Tweets </h2>
+<h2> Grocery List </h2>
 
-<% @tweets.each do |tweet| %>
+<% @lists.each do |list| %>
   <div>
-    <%= tweet.content %>
+    <h3><%= list.store_name %></h3>
+    <p><%= list.item_list %></p>
   </div>
 <% end %>
+<a href="/grocery_list/new">Create a New List here</a>
+<a href="/users/logout"> Logout </a>

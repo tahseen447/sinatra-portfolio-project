@@ -21,7 +21,7 @@ class GrocerListController < ApplicationController
       if params[:content] == ""
         redirect to "/grocery_list/new"
       else
-        @grocery_list = current_user.grocery_lists.build(item_list: params[:item_list])
+        @grocery_list = current_user.grocery_lists.build(store_name: params[:store_name], item_list: params[:content])
         if @grocery_list.save
           redirect to "/grocery_list/#{@grocery_list.id}"
         else
@@ -62,7 +62,7 @@ class GrocerListController < ApplicationController
       else
         @grocery_list = GroceryList.find_by_id(params[:id])
         if @grocery_list && @grocery_list.user == current_user
-          if @grocery_list.update(content: params[:content])
+          if @grocery_list.update(store_name: params[:store_name], item_list: params[:content])
             redirect to "/grocery_list/#{@grocery_list.id}"
           else
             redirect to "/grocery_list/#{@grocery_list.id}/edit"
@@ -79,8 +79,8 @@ class GrocerListController < ApplicationController
   delete '/grocery_list/:id/delete' do
     if logged_in?
       @grocery_list = GroceryList.find_by_id(params[:id])
-      if @tweet && @tweet.user == current_user
-        @tweet.delete
+      if @grocery_list && @grocery_list.user == current_user
+        @grocery_list.delete
       end
       redirect to '/grocery_list'
     else
