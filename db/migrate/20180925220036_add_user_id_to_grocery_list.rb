@@ -1,0 +1,5 @@
+class AddUserIdToGroceryList < ActiveRecord::Migration
+  def change
+    add_column :grocery_lists, :user_id, :integer
+  end
+end
