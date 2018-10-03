@@ -12,10 +12,12 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
         redirect to '/signup'
       else
-        @user = User.create(:username=>params[:username], :email=>params[:email], :password =>[:password])
-        @user.save
+        @user = User.new(:username=>params[:username], :email=>params[:email], :password =>[:password])
+        if @user.save
         session[:user_id] = @user.id
+        binding.pry
         redirect to '/grocery_list'
+      end
       end
     end
 
@@ -27,6 +29,7 @@ class UsersController < ApplicationController
 
   post "/login" do
 		user = User.find_by(:username => params[:username])
+    binding.pry
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
       redirect to '/grocery_list'
@@ -36,13 +39,10 @@ class UsersController < ApplicationController
 	end
 
   get "/users/logout" do
-    binding.pry
     if logged_in?
       session.clear
-      redirect '/login'
-    else
-      redirect to '/'
     end
+      redirect to '/'
   end
 
 end

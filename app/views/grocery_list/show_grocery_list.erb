@@ -1,10 +1,15 @@
 <h3><%= @grocery_list.store_name %></h3>
-<p><%= @grocery_list.item_list %>
+<p><%= @grocery_list.item_list %></p>
 
-<form method="post" action="/grocery_list/<%=@grocery_list.id%>/delete">
+<p>
+  <form method="post" action="/grocery_list/<%=@grocery_list.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete List">
 </form>
-
+</p>
+<p>
 <a href="/grocery_list/<%=@grocery_list.id%>/edit">Edit List </a>
+</p>
+<p>
 <a href="/grocery_list">Home</a>
+</p>

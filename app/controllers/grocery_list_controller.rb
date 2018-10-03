@@ -1,7 +1,7 @@
 class GrocerListController < ApplicationController
   get '/grocery_list' do
     if logged_in?
-      @lists = GroceryList.all
+      @lists = current_user.grocery_lists
       erb :'grocery_list/list'
     else
       redirect to '/login'
@@ -43,6 +43,7 @@ class GrocerListController < ApplicationController
   end
 
   get '/grocery_list/:id/edit' do
+    binding.pry
     if logged_in?
       @grocery_list = GroceryList.find_by_id(params[:id])
       if @grocery_list && @grocery_list.user == current_user

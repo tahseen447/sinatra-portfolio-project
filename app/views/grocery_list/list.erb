@@ -1,10 +1,12 @@
 <p> Welcome, <%= current_user.username %>
-<h2> Grocery List </h2>
+  <h2> Here's your Grocery Lists </h2>
 
 <% @lists.each do |list| %>
   <div>
     <h3><%= list.store_name %></h3>
-    <p><%= list.item_list %></p>
+    <p><%= list.item_list %>
+    <a href="/grocery_list/<%=list.id%>/edit">Edit List </a>
+  </p>
   </div>
 <% end %>
 <a href="/grocery_list/new">Create a New List here</a>
