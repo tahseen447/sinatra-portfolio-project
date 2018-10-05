@@ -43,7 +43,6 @@ class GrocerListController < ApplicationController
   end
 
   get '/grocery_list/:id/edit' do
-    binding.pry
     if logged_in?
       @grocery_list = GroceryList.find_by_id(params[:id])
       if @grocery_list && @grocery_list.user == current_user

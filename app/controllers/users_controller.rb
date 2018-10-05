@@ -15,7 +15,6 @@ class UsersController < ApplicationController
         @user = User.new(:username=>params[:username], :email=>params[:email], :password =>params[:password])
         if @user.save
         session[:user_id] = @user.id
-        binding.pry
         redirect to '/grocery_list'
       end
       end
@@ -29,7 +28,6 @@ class UsersController < ApplicationController
 
   post "/login" do
 		user = User.find_by(:username => params[:username])
-    binding.pry
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
       redirect to '/grocery_list'
