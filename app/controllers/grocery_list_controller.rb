@@ -77,7 +77,6 @@ class GrocerListController < ApplicationController
   end
 
   delete '/grocery_list/:id/delete' do
-          binding.pry
     if logged_in?
       @grocery_list = GroceryList.find_by_id(params[:id])
       if @grocery_list && @grocery_list.user == current_user
